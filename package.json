@@ -4,17 +4,17 @@
   "private": true,
   "dependencies": {
     "cra-template-immersion": "1.0.3",
-	"immersion-presentation": "1.1.5",
+    "immersion-presentation": "1.1.5",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "^4.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "pdf": "node ./node_modules/immersion-presentation/make-pdf"
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "test": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts test",
+    "eject": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts eject",
+    "pdf": "cross-env NODE_OPTIONS=--openssl-legacy-provider node ./node_modules/immersion-presentation/make-pdf"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +30,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
