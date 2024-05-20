@@ -8,6 +8,7 @@ import { useState } from "react";
 import {
   AnimateSVG,
   Morph,
+  InlineMath, DisplayMath,
   m,
   M,
   Show,
@@ -40,7 +41,7 @@ const {
 
 function App() {
   return (
-    <Presentation>
+    <Presentation bibUrl={null} compileHost={null} embed={false} preamble="" embedOptions={{ render: null, slideIndex: 0, stepIndex: 0 }}>
       <TitleSlide 
         title="Advanced Topics in Computer Science" 
         subtitle="A deep dive into algorithms and data structures" 
@@ -54,7 +55,43 @@ function App() {
       <TableOfContentsSlide header="Table of Contents">
         <Notes>Here is an overview of the sections we will cover today.</Notes>
       </TableOfContentsSlide>
-      
+
+      <SectionSlide section="Introduction" />
+
+      <Slide steps={[1, 2]}>
+        {(step) =>
+          <>
+            <Show when={step >= 1}>
+              <Portal zoomin>
+                <div>Main Content - Part 1</div>
+                <div>Detailed Explanation</div>
+              </Portal>
+            </Show>
+            <Show when={step >= 2}>
+              <Portal zoomin>
+                <div>Detailed Explanation</div>
+              </Portal>
+            </Show>
+          </>}
+      </Slide>
+
+      <Slide steps={[1, 2]}>
+        {(step) =>(
+          <>
+            <AnimateSVG
+              src={"./assets/example-image.svg"}
+              step={step == 1 ? {rect1: {opacity: 1}, circle1: {opacity: 0}} : {circle1: {opacity: 1, seconds: 0.3}, rect1: {opacity: 0.3, seconds: 0.3}}
+              }
+              width="200px"
+              height="200px"
+              style={{ border: '1px solid black', margin: '20px auto' }}
+              className="animated-svg"
+            />
+            <Morph>{step == 1 ? "TEST" : "NOTEST"}</Morph>
+          </>
+          )}
+      </Slide>
+
       <SectionSlide section="Introduction">
         <Notes>This section provides an introduction to the core concepts.</Notes>
       </SectionSlide>
@@ -69,7 +106,7 @@ function App() {
             <Show when={step >= 2}>
               <div>
                 <p>Consider the following formula for time complexity:</p>
-                <p>{`$$ T(n) = O(n^2) $$`}</p>
+                <InlineMath>T(n) = O(n^2)</InlineMath>
               </div>
             </Show>
             <Show when={step >= 3}>
@@ -78,11 +115,11 @@ function App() {
           </>
         )}
       </Slide>
-      
+
       <SectionSlide section="Data Structures">
         <Notes>In this section, we'll explore various data structures.</Notes>
       </SectionSlide>
-      
+
       <Slide steps={[1, 2]}>
         {(step) => (
           <>
@@ -129,24 +166,31 @@ function App() {
               <p>Dynamic programming is a method for solving complex problems by breaking them down into simpler subproblems.</p>
             </Show>
             <Show when={step >= 2}>
-              <Box title="Example: Fibonacci Sequence" className="p-4">
-                <p>{`$$ F(n) = F(n-1) + F(n-2) $$`}</p>
-                <p>Using memoization to store intermediate results.</p>
+              <Box title="Example: Fibonacci Sequence">
+                <p>The Fibonacci sequence is defined as:</p>
+                {M`F(n) = F(n-1) + F(n-2)`}
+                <p>with initial values:</p>
+                {m`F(0) = 0, F(1) = 1`}
               </Box>
+            </Show>
+            <Show when={step >= 3}>
+              <Cite id="cormen2009" />
             </Show>
           </>
         )}
       </Slide>
-      
-      <ConclusionSlide section="Conclusion">
-        <Notes>This is the conclusion of our presentation. Thank you for your attention!</Notes>
-      </ConclusionSlide>
-      
+
       <QuestionSlide title="Any Questions?">
-        <Notes>Feel free to ask any questions about the topics covered.</Notes>
+        <Notes>Feel free to ask any questions you might have.</Notes>
       </QuestionSlide>
-      
-      <BibliographySlide />
+
+      <ConclusionSlide section="Conclusion">
+        <Notes>Summarizing the key points covered in the presentation.</Notes>
+      </ConclusionSlide>
+
+      <BibliographySlide>
+        <Notes>Here are the references used throughout this presentation.</Notes>
+      </BibliographySlide>
     </Presentation>
   );
 }
