@@ -1,0 +1,5 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect id="rect1" x="10" y="10" width="50" height="50" fill="blue" />
+  <circle id="circle1" cx="100" cy="100" r="30" fill="red" />
+  <text id="text1" x="50" y="150" font-family="Verdana" font-size="20">Hello</text>
+</svg>
