@@ -80,14 +80,14 @@ function App() {
           <>
             <AnimateSVG
               src={"./assets/example-image.svg"}
-              step={step == 1 ? {rect1: {opacity: 1}, circle1: {opacity: 0}} : {circle1: {opacity: 1, seconds: 0.3}, rect1: {opacity: 0.3, seconds: 0.3}}
+              step={step === 1 ? {rect1: {opacity: 1}, circle1: {opacity: 0}} : {circle1: {opacity: 1, seconds: 0.3}, rect1: {opacity: 0.3, seconds: 0.3}}
               }
               width="200px"
               height="200px"
               style={{ border: '1px solid black', margin: '20px auto' }}
               className="animated-svg"
             />
-            <Morph>{step == 1 ? "TEST" : "NOTEST"}</Morph>
+            <Morph>{step === 1 ? "TEST" : "NOTEST"}</Morph>
           </>
           )}
       </Slide>
